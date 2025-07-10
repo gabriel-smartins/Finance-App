@@ -12,11 +12,18 @@ export const created = (body) => {
     }
 }
 
+export const ok = (body) => {
+    return {
+        statusCode: 200,
+        body,
+    }
+}
+
 export const serverError = () => {
-   return {
+    return {
         statusCode: 500,
         body: {
-          message: 'Internal server error'
+            message: 'Internal server error',
         },
     }
 }
