@@ -27,3 +27,10 @@ export const serverError = () => {
         },
     }
 }
+
+export const notFound = (body) => {
+    return {
+        statusCode: 404,
+        body,
+    }
+}
