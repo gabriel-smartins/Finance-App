@@ -12,6 +12,6 @@ export class PostgresCreateUserRepository {
             ]
         )
 
-       return results[0]
+        return results[0]
     }
 }
