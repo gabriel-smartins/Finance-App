@@ -1,18 +1,18 @@
 import { EmailAlreadyInUseError } from '../errors/user.js'
 import { PostgresGetUserByEmailRepository } from '../repositories/postgres/get-user-by-email.js'
 import { PostgresUpdateUserRepository } from '../repositories/postgres/update-user.js'
+import bcrypt from 'bcrypt'
 
 export class UpdateUserUseCase {
     async execute(userId, updateUserParams) {
-
         if (updateUserParams.email) {
             const postgresGetUserByEmailRepository =
                 new PostgresGetUserByEmailRepository()
 
             const userWithProvidedEmail =
-                postgresGetUserByEmailRepository.execute(updateUserParams.email)
+               await postgresGetUserByEmailRepository.execute(updateUserParams.email)
 
-            if (userWithProvidedEmail) {
+            if (userWithProvidedEmail && userWithProvidedEmail.id != userId) {
                 throw new EmailAlreadyInUseError()
             }
         }
@@ -33,7 +33,7 @@ export class UpdateUserUseCase {
         const postgresUpdateUserRepository = new PostgresUpdateUserRepository()
         const updatedUser = await postgresUpdateUserRepository.execute(
             userId,
-            updateUserParams
+            user
         )
 
         return updatedUser
