@@ -6,7 +6,7 @@ export class PostgresDeleteUserRepository {
             `
             DELETE FROM users 
             WHERE id = $1 
-            RETURNING *
+            RETURNING *;
             `,
             [userId]
         )
