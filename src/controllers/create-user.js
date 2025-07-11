@@ -47,6 +47,7 @@ export class CreateUserController {
             return created(createdUser)
         } catch (error) {
             if (error instanceof EmailAlreadyInUseError) {
+                console.error(error)
                 return badRequest({ message: error.message })
             }
             console.error(error)
