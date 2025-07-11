@@ -1,9 +1,14 @@
 import { GetUserByIdUseCase } from '../use-cases/get-user-by-id.js'
-import { serverError, ok, badRequest, notFound } from './helpers/http.js'
-import { checkIfIdIsValid, invalidIdResponse } from './helpers/user.js'
+import {
+    checkIfIdIsValid,
+    invalidIdResponse,
+    serverError,
+    ok,
+    notFound,
+} from './helpers/index.js'
 
 export class GetUserByIdController {
-    async execute(httpsRequest) {
+    async execute(httpRequest) {
         try {
             const userId = httpRequest.params.userId
 
@@ -16,7 +21,7 @@ export class GetUserByIdController {
             const getUserByIdUseCase = new GetUserByIdUseCase()
 
             const user = await getUserByIdUseCase.execute(
-                httpsRequest.params.userId
+                httpRequest.params.userId
             )
 
             if (!user) {
