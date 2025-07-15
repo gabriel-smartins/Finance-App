@@ -12,6 +12,10 @@ export const checkIfIsString = (value) => {
     typeof value === 'string'
 }
 
+export const requiredFieldsIsMissingResponse = (field) => badRequest({
+    message: `The field ${field} is required`
+})
+
 export const validateRequiredFields = (params, requiredFields) => {
     for (const field of requiredFields) {
         const fieldIsMissing = !params[field]
