@@ -13,7 +13,7 @@ export class CreateUserUseCase {
             await this.getUserByEmailRepository.execute(createUserParams.email)
 
         if (userWithProvidedEmail) {
-            throw new EmailAlreadyInUseError()
+            throw new EmailAlreadyInUseError(createUserParams.email)
         }
 
         const userId = uuidv4()
