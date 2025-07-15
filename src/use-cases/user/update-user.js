@@ -1,4 +1,4 @@
-import { EmailAlreadyInUseError } from '../errors/user.js'
+import { EmailAlreadyInUseError } from '../../errors/user.js'
 import bcrypt from 'bcrypt'
 
 export class UpdateUserUseCase {
@@ -9,8 +9,7 @@ export class UpdateUserUseCase {
 
     async execute(userId, updateUserParams) {
         if (updateUserParams.email) {
-            
-                const userWithProvidedEmail =
+            const userWithProvidedEmail =
                 await this.getUserByEmailRepository.execute(
                     updateUserParams.email
                 )

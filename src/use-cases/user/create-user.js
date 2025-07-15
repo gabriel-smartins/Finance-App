@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid'
 import bcrypt from 'bcrypt'
-import { EmailAlreadyInUseError } from '../errors/user.js'
+import { EmailAlreadyInUseError } from '../../errors/user.js'
 
 export class CreateUserUseCase {
     constructor(createUserRepository, getUserByEmailRepository) {
@@ -9,11 +9,8 @@ export class CreateUserUseCase {
     }
 
     async execute(createUserParams) {
-        
         const userWithProvidedEmail =
-            await this.getUserByEmailRepository.execute(
-                createUserParams.email
-            )
+            await this.getUserByEmailRepository.execute(createUserParams.email)
 
         if (userWithProvidedEmail) {
             throw new EmailAlreadyInUseError()
