@@ -14,6 +14,8 @@ const app = express()
 
 app.use(express.json())
 
+/* Users */
+
 app.get('/api/users/:userId', async (request, response) => {
     const getUserByIdController = makeGetUserByIdController()
 
@@ -45,6 +47,8 @@ app.delete('/api/users/:userId', async (request, response) => {
 
     response.status(statusCode).send(body)
 })
+
+/* Transactions */
 
 app.post('/api/transactions', async (request, response) => {
     const createTransactionController = makeCreateTransactionController()
