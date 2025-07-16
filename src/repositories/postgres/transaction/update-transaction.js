@@ -1,4 +1,4 @@
-import { PostgresHelper } from "../../../db/postgres/helper.js"
+import { PostgresHelper } from '../../../db/postgres/helper.js'
 
 export class PostgresUpdateTransactionRepository {
     async execute(transactionId, updateTransactionParams) {
@@ -7,7 +7,7 @@ export class PostgresUpdateTransactionRepository {
 
         Object.keys(updateTransactionParams).forEach((key) => {
             updateFields.push(`${key} = $${updateValues.length + 1}`)
-            updateValues.push(updateUserParams[key])
+            updateValues.push(updateTransactionParams[key])
         })
 
         updateValues.push(transactionId)
@@ -18,7 +18,10 @@ export class PostgresUpdateTransactionRepository {
             WHERE id = $${updateValues.length}
             RETURNING *
             `
-        const updateTransaction = await PostgresHelper.query(updateQuery, updateValues)
+        const updateTransaction = await PostgresHelper.query(
+            updateQuery,
+            updateValues
+        )
 
         return updateTransaction[0]
     }

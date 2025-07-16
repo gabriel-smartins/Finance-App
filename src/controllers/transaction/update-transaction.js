@@ -27,9 +27,9 @@ export class UpdateTransactionController {
 
             const allowedFields = ['name', 'date', 'amount', 'type']
 
-            const someFieldIsNotAllowed = Object.keys(params).some((field) => {
-                !allowedFields.includes(field)
-            })
+            const someFieldIsNotAllowed = Object.keys(params).some(
+                (field) => !allowedFields.includes(field)
+            )
 
             if (someFieldIsNotAllowed) {
                 return badRequest({
@@ -46,7 +46,9 @@ export class UpdateTransactionController {
             }
 
             if (params.type) {
-                const typeIsValid = checkIfTypeIsValid(params.type)
+                const type = params.type.toUpperCase()
+
+                const typeIsValid = checkIfTypeIsValid(type)
 
                 if (!typeIsValid) {
                     return invalidTypeResponse()
