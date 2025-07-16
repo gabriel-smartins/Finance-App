@@ -6,10 +6,10 @@ export class PostgresGetTransactionsByUserIdRepository {
             `
             SELECT * FROM transactions
             WHERE user_id = $1
-            `, 
+            `,
             [userId]
         )
 
-        return transactions[0]
+        return transactions
     }
 }

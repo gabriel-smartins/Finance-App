@@ -2,7 +2,7 @@ import { UserNotFoundError } from '../../errors/user.js'
 import {
     serverError,
     userNotFoundResponse,
-    requiredFieldMissingResponse,
+    requiredFieldsIsMissingResponse,
     checkIfIdIsValid,
     invalidIdResponse,
     ok,
@@ -17,7 +17,7 @@ export class GetTransactionsByUserIdController {
             const userId = httpRequest.query.userId
 
             if (!userId) {
-                return requiredFieldMissingResponse()
+                return requiredFieldsIsMissingResponse()
             }
 
             const userIdIsValid = checkIfIdIsValid(userId)
