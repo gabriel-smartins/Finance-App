@@ -4,6 +4,7 @@ import {
     invalidIdResponse,
     serverError,
     userNotFoundResponse,
+    ok
 } from '../helpers/index.js'
 
 export class GetUserBalanceController {
